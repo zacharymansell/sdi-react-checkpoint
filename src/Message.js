@@ -1,37 +1,65 @@
 import React from 'react';
 
-const Message = ({email, minimized, handleClick}) => {
-  const {sender, recipient, subject, message, date} = email;
+const Message = ({ email, minimized, handleClick }) => {
+  const {
+    sender, recipient, subject, message, date,
+  } = email;
 
-  const minimizedView =
-    <div onClick={(e) => {handleClick(email)}}>
-      From: {sender}
+  const minimizedView = (
+    <div
+      tabIndex={0}
+      role="textbox"
+      onKeyPress={() => handleClick(email)}
+      onClick={() => { handleClick(email); }}
+    >
+      From:
+      {' '}
+      {sender}
       <br />
-      Subject: {subject}
+      Subject:
+      {' '}
+      {subject}
     </div>
+  );
 
-  const maximizedView =
-    <div>
+  const maximizedView = (
+    <div
+      tabIndex={0}
+      role="textbox"
+      onKeyPress={handleClick}
+      onClick={() => { handleClick(email); }}
+    >
       <div>
-        Sent by: {sender}
+        Sent by:
+        {' '}
+        {sender}
       </div>
       <div>
-        To: {recipient}
+        To:
+        {' '}
+        {recipient}
       </div>
       <div>
-        Date: {date}
+        Date:
+        {' '}
+        {date}
       </div>
       <div>
-        Subject: {subject}
+        Subject:
+        {' '}
+        {subject}
       </div>
       <div>
-        Message: {message}
+        Message:
+        {' '}
+        {message}
       </div>
     </div>
+  );
 
   return (
     minimized ? minimizedView : maximizedView
-  )
-}
+  );
+};
 
 export default Message;

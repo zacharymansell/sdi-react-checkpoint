@@ -1,24 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Message from './Message.js';
 
-const AllMessages = ({emails, handleClick}) => {
-  return (
-    <div>
-      {emails.map((e, i) => {
-        return (
-          <div>
-            <Message
-              email={e}
-              key={i}
-              minimized={true}
-              handleClick={handleClick}
-            />
-            <br />
-          </div>
-        )
-      })}
-    </div>
-  )
-}
+const AllMessages = ({
+  email, emails, handleClick,
+}) => (
+  <div>
+    {emails.map((e) => (
+      <div>
+        <Message
+          email={e}
+          key={e.id}
+          minimized={e !== email}
+          handleClick={handleClick}
+        />
+        <br />
+      </div>
+    ))}
+  </div>
+);
+
+AllMessages.propTypes = {
+  email: PropTypes.shape({
+    sender: PropTypes.string.isRequired,
+  }),
+  emails: PropTypes.arrayOf({}),
+  handleClick: PropTypes.func.isRequired,
+};
+
+AllMessages.defaultProps = { email: {}, emails: [] };
 
 export default AllMessages;
