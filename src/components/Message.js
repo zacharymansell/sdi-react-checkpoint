@@ -1,19 +1,22 @@
 import React from 'react';
+import styles from '../styles/Message.module.css';
 
-const Message = ({ email, minimized, handleClick }) => {
+const Message = ({
+  email, minimized, handleClick,
+}) => {
   const {
     sender, recipient, subject, message, date,
   } = email;
 
   const minimizedView = (
     <div
+      className={styles.message}
       tabIndex={0}
       role="textbox"
       onKeyPress={() => handleClick(email)}
       onClick={() => { handleClick(email); }}
     >
       From:
-      {' '}
       {sender}
       <br />
       Subject:
@@ -24,6 +27,7 @@ const Message = ({ email, minimized, handleClick }) => {
 
   const maximizedView = (
     <div
+      className={styles.message}
       tabIndex={0}
       role="textbox"
       onKeyPress={handleClick}

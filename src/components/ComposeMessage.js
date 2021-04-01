@@ -19,6 +19,7 @@ const ComposeMessage = ({
         onChange={(e) => handleChange(e)}
       />
     </label>
+    <br />
     <label htmlFor="subject">
       Subject:
       <input
@@ -29,6 +30,7 @@ const ComposeMessage = ({
         onChange={handleChange}
       />
     </label>
+    <br />
     <label htmlFor="message">
       Message:
       <input

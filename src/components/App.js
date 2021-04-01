@@ -1,4 +1,4 @@
-import './App.css';
+import '../styles/App.css';
 import React, { Component } from 'react';
 import AllMessages from './AllMessages';
 import ComposeMessage from './ComposeMessage';
@@ -77,6 +77,7 @@ class App extends Component {
       subject,
       message,
     } = this.state;
+    const { handleChange } = this;
     const regex = new RegExp(searchTerm, 'gi');
     const filtered = emails.filter((e) => (
       e.sender.match(regex)
@@ -87,8 +88,9 @@ class App extends Component {
     return (
       <div className="App">
         <Search
+          className="search"
           searchTerm={searchTerm}
-          handleChange={this.handleChange}
+          handleChange={handleChange}
         />
         <AllMessages
           email={email}
@@ -100,7 +102,7 @@ class App extends Component {
           subject={subject}
           message={message}
           handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
+          handleChange={handleChange}
         />
       </div>
     );
