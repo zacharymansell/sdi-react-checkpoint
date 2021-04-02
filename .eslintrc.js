@@ -6,6 +6,8 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
+    'plugin:testing-library/react',
+    'plugin:jest/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -16,6 +18,8 @@ module.exports = {
   },
   plugins: [
     'react',
+    'testing-library',
+    'jest',
   ],
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
