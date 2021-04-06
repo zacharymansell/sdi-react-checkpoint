@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -25,13 +26,20 @@ afterAll(() => server.close());
 
 test('renders the queried email', async () => {
   render(<App />);
-  await screen.findByText(/testSender/i);
-  const email = screen.getByText(/testSender@galvanize.com/i);
-  screen.debug();
+  const email = await screen.findByText(/testSender@galvanize.com/i);
   expect(email).toBeInTheDocument();
 });
 
-// test('AllMessages displays a message', () => {
-//   render(<Message />);
-//   screen.debug();
-// });
+// Next: Test clicking the compose button
+test('sending a message makes the text boxes clear', () => {
+  render(<App />);
+  // test everything
+  userEvent.type(screen.queryByText(/From/), 'marjorie@c.com');
+  userEvent.type(screen.queryByText(/Subject/), 'Taxes');
+  userEvent.type(screen.queryByText(/Message/), 'Please do them');
+
+  userEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+  const textBox = screen.getByRole('textbox', { name: /from/i });
+  expect(textBox).toBeEmptyDOMElement();
+});
